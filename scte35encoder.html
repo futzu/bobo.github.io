@@ -1,0 +1,127 @@
+
+<html lang="en-US">
+	<head>
+
+<style>
+			form,div,pre,label,input,#outofnet,button {
+				/* Just to center the form on the page */
+				margin:  auto;
+				/* To see the outline of the form */
+				padding: 1em;
+				border: 1px solid #ccc;
+				border-radius: 1em;
+				margin-top:1em;
+			}
+			form{
+				width:400px;
+			}
+			div,pre{
+				width:auto;
+			}
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			form li + li {
+				margin-top: 1em;
+			}
+
+			label {
+				/* To make sure that all labels have the same size and are properly aligned */
+				display: inline-block;
+				width: 120px;
+				text-align: right;
+			}
+
+			input,
+			textarea {
+				/* To make sure that all text fields have the same font settings By default, textareas have a monospace font */
+				font: 1em sans-serif;
+				/* To give the same size to all text fields */
+		//		width: 160px;
+				box-sizing: border-box; /* To harmonize the look & feel of text field border */
+				border: 1px solid #999;
+			}
+
+			input:focus,
+			textarea:focus {
+				/* To give a little highlight on active elements */
+				border-color: #000;
+			}
+
+			textarea {
+				/* To properly align multiline text fields with their labels */
+				vertical-align: top;
+				/* To give enough room to type some text */
+				height: 5em;
+			}
+
+			.button {
+				/* To position the buttons to the same position of the text fields */
+				padding: 1em;
+				/* same size as the label elements */
+			}
+
+			button {
+				/* This extra margin represent roughly the same space as the space between the labels and their text fields */
+				margin-left: 0.5em;
+			}
+	#wrap { display:none;}
+	#outofnet{height:40px;width:100px; margin:auto; padding:1em;}
+	pre{border:none;}
+	</style>
+
+	</head>
+
+	<body>
+<h1> Make a SCTE-35 Splice Insert, powered by threefive.</h1>
+<form action="https://iodisco.com/cgi-bin/scte35encoder" method="post"  target="_self" >
+<ul>
+<li>
+<label for="eventid">Splice Event ID </label>
+<input type="number" id="eventid" name="eventid" min=1 max=4294967296 />
+</li>
+<li>
+<label for="pts">PTS (in seconds)</label>
+<input type="number" id="pts" name="pts" min=0 step=0.000001 max =95443.717678 />
+</li>
+<li>
+<label for="outofnet">Out of Network Indicator</label>
+<input type="checkbox" id="outofnet" name="outofnet" value="False" onchange="showduration()"/>
+</li>
+<li id="wrap">
+<label for="duration">Duration</label>
+<input type="number" id="duration" name="duration" min=0 step=0.000001  max =1000 />
+</li>
+<input  type="submit" id="submit" value="Submit">
+</ul>
+</form>
+<br>
+
+
+<pre>
+
+
+</pre>
+	</body>
+	<script>
+
+function showduration(){
+	wrap = document.querySelector("#wrap")
+	outofnet=document.querySelector("#outofnet")
+	if (outofnet.checked==false){
+outofnet.value="False"
+wrap.style.display="none"
+	}else{
+	wrap.style.display="block"
+	outofnet.value="True"
+	}
+	
+}
+document.querySelector("#outofnet").onChange=function(){showduration()}
+
+	</script>
+</html>
+
